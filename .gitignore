@@ -1,6 +1,5 @@
 /.vs/
-/Assets/
-!/Assets/*.*
+/Assets/external/
 
 /[Ll]ibrary/
 /[Tt]emp/
