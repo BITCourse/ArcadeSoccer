@@ -1,7 +1,8 @@
 ﻿using UnityEngine;
 using System.Collections;
+using UnityEngine.Networking;
 
-public class BallReset : MonoBehaviour {
+public class BallReset : NetworkBehaviour {
 
     public Vector3 resetPosition = new Vector3();
 

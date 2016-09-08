@@ -1,7 +1,8 @@
 ﻿using UnityEngine;
 using System.Collections;
+using UnityEngine.Networking;
 
-public class GoalChecker : MonoBehaviour {
+public class GoalChecker : NetworkBehaviour {
 
     public GameObject ball;
     public GameObject showWhenGoal = null;
