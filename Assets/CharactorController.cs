@@ -2,8 +2,9 @@
 using System;
 using System.Collections;
 using UnityStandardAssets.CrossPlatformInput;
+using UnityEngine.Networking;
 
-public class CharactorController : MonoBehaviour {
+public class CharactorController : NetworkBehaviour {
 
     public Transform mainCamera;
 
@@ -36,7 +37,8 @@ public class CharactorController : MonoBehaviour {
 	
 	// Update is called once per frame
 	void Update () {
-
+		if (!isLocalPlayer)
+			return;
         // 处理控制器
         float deltaX = CrossPlatformInputManager.GetAxis("Horizontal");
         float deltaZ = CrossPlatformInputManager.GetAxis("Vertical");
