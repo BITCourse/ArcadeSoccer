@@ -3,9 +3,12 @@ using System;
 using System.Collections;
 using UnityStandardAssets.CrossPlatformInput;
 
-public class CharactorController : MonoBehaviour {
+public class CommonController : MonoBehaviour {
 
     public Transform mainCamera;
+
+    public GameObject ball;
+    public GameObject push;
 
     public float cameraDistance = 1f;
     public float cameraHeight = 1f;
@@ -23,11 +26,21 @@ public class CharactorController : MonoBehaviour {
     private Rigidbody rigid = null;
 
     private Collider col = null;
+    
+    private Animation anim = null;
+
+    private float lastPunch = -10f;
+
+    public Quaternion getViewRotation()
+    {
+        return Quaternion.Euler(targetViewRotation.y, targetViewRotation.x, 0);
+    }
 
     // Use this for initialization
     void Start () {
         rigid = GetComponent<Rigidbody>();
         col = GetComponents<Collider>()[0];
+        anim = GetComponent<Animation>();
         if (mainCamera == null)
         {
             mainCamera = Camera.main.transform;
@@ -45,10 +58,17 @@ public class CharactorController : MonoBehaviour {
         float xRot = CrossPlatformInputManager.GetAxis("Mouse X") * mouseXSensitivity;
         float yRot = CrossPlatformInputManager.GetAxis("Mouse Y") * mouseYSensitivity;
 
+        if(fire1)
+        {
+            lastPunch = Time.time;
+            push.GetComponent<PushOnce>().punch();
+        }
+
         // 左右横移转身
         float targetTurn = 0;
-        if (deltaX < 0) targetTurn = -30.0f;
-        else if (deltaX > 0) targetTurn = 30.0f;
+        if (deltaX != 0 || deltaZ != 0)
+            targetTurn = Mathf.Atan2(deltaX, deltaZ) / Mathf.PI * 180f;
+        targetTurn -= Mathf.Round((targetTurn - bodyTurn) / 360) * 360;
 
         bodyTurn += (targetTurn - bodyTurn) * (1 - Mathf.Exp(-Time.deltaTime * 10f));
         
@@ -60,12 +80,30 @@ public class CharactorController : MonoBehaviour {
         /*transform.localPosition += Quaternion.Euler(0, targetViewRotation.x, 0) 
             * new Vector3(deltaX * moveSpeed, 0, deltaZ * moveSpeed);*/
         float velY = rigid.velocity.y;
-        if (jump && transform.position.y < 0.1)
+        if (jump && transform.position.y < 0.1f)
         {
             velY = jumpSpeed;
         }
         rigid.velocity = Quaternion.Euler(0, targetViewRotation.x, 0)
             * new Vector3(deltaX * moveSpeed, velY, deltaZ * moveSpeed);
+
+        // 人物动画
+        if(fire1 || Time.time - lastPunch < 0.5f)
+        {
+            anim.CrossFade("punch");
+        }
+        else if(jump || transform.position.y > 0.1f)
+        {
+            anim.CrossFade("hit", 0.1f);
+        }
+        else if(deltaX != 0 || deltaZ != 0)
+        {
+            anim.CrossFade("run", 0.5f);
+        }
+        else
+        {
+            anim.CrossFade("idle", 0.3f);
+        }
 
         // 视角转动
         targetViewRotation.x = targetViewRotation.x + xRot;
