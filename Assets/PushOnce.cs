@@ -3,10 +3,9 @@ using System.Collections;
 
 public class PushOnce : MonoBehaviour {
 
-    public GameObject charactor;
+    public CommonController charactor;
     public float force = 100f;
     
-    private CommonController con;
     private float proc = 0.0f;
 
     public void punch()
@@ -16,7 +15,10 @@ public class PushOnce : MonoBehaviour {
 
     // Use this for initialization
     void Start () {
-        con = charactor.GetComponent<CommonController>();
+        if(charactor == null)
+        {
+            charactor = GetComponentInParent<CommonController>();
+        }
     }
 	
 	// Update is called once per frame
@@ -39,7 +41,7 @@ public class PushOnce : MonoBehaviour {
     {
         if(other.tag == "Ball")
         {
-            Quaternion direction = con.getViewRotation();
+            Quaternion direction = charactor.getViewRotation();
             other.GetComponent<Rigidbody>().AddForce(direction * Vector3.forward * force, ForceMode.Impulse);
         }
     }

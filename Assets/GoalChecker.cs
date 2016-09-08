@@ -6,6 +6,9 @@ public class GoalChecker : MonoBehaviour {
     public GameObject ball;
     public GameObject showWhenGoal = null;
 
+    public enum GoalSide { Blue, Red };
+    public GoalSide goalSide;
+
     // Use this for initialization
     void Start () {
 	
@@ -20,8 +23,19 @@ public class GoalChecker : MonoBehaviour {
     {
         if (other.gameObject == ball)
         {
+            Score score = Score.Instance();
+            if(goalSide == GoalSide.Blue)
+            {
+                score.score(1, 0);
+            }
+            else
+            {
+                score.score(0, 1);
+            }
+
             showWhenGoal.SetActive(true);
             Invoke("RemovePrefab", 3);
+
         }
 
     }

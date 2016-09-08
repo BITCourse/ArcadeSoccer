@@ -10,6 +10,11 @@ public class CommonController : MonoBehaviour {
     public GameObject ball;
     public GameObject push;
 
+    public string idleAnimation = "idle";
+    public string moveAnimation = "run";
+    public string jumpAnimation = "hit";
+    public string pushAnimation = "punch";
+
     public float cameraDistance = 1f;
     public float cameraHeight = 1f;
 
@@ -90,19 +95,19 @@ public class CommonController : MonoBehaviour {
         // 人物动画
         if(fire1 || Time.time - lastPunch < 0.5f)
         {
-            anim.CrossFade("punch");
+            anim.CrossFade(pushAnimation);
         }
         else if(jump || transform.position.y > 0.1f)
         {
-            anim.CrossFade("hit", 0.1f);
+            anim.CrossFade(jumpAnimation, 0.1f);
         }
         else if(deltaX != 0 || deltaZ != 0)
         {
-            anim.CrossFade("run", 0.5f);
+            anim.CrossFade(moveAnimation, 0.5f);
         }
         else
         {
-            anim.CrossFade("idle", 0.3f);
+            anim.CrossFade(idleAnimation, 0.3f);
         }
 
         // 视角转动
