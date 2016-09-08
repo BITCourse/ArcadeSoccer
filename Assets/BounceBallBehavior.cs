@@ -18,12 +18,11 @@ public class BounceBallBehavior : MonoBehaviour {
 
     void OnCollisionEnter(Collision collision)
     {
-        Debug.Log(collision.gameObject.tag);
         if(collision.gameObject.tag == "Player")
         {
             Vector3 dir = transform.position - collision.gameObject.transform.position;
             dir.Normalize();
-            dir *= collision.gameObject.GetComponent<Rigidbody>().velocity.magnitude * 0.5f;
+            dir *= collision.gameObject.GetComponent<Rigidbody>().velocity.magnitude * 0.3f;
             dir.y *= 0.5f;
             rigid.velocity += dir;
         }
