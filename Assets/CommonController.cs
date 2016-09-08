@@ -44,7 +44,7 @@ public class CommonController : NetworkBehaviour {
 
     // Use this for initialization
     void Start () {
-        rigid = GetComponent<Rigidbody>();
+		rigid = GetComponent<Rigidbody> ();
         col = GetComponents<Collider>()[0];
         anim = GetComponent<Animation>();
         if (mainCamera == null)
@@ -64,7 +64,7 @@ public class CommonController : NetworkBehaviour {
         bool fire1 = CrossPlatformInputManager.GetButtonDown("Fire1");
         float xRot = CrossPlatformInputManager.GetAxis("Mouse X") * mouseXSensitivity;
         float yRot = CrossPlatformInputManager.GetAxis("Mouse Y") * mouseYSensitivity;
-
+        
         if(fire1)
         {
             lastPunch = Time.time;

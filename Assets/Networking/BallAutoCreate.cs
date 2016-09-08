@@ -3,12 +3,13 @@ using UnityEngine.Networking;
 
 public class BallAutoCreate : NetworkBehaviour
 {
-
     public GameObject RollerBall;
+
+	public Vector3 createPosition;
 
     public override void OnStartServer()
     {
-        var pos = new Vector3(0, 0.2f, 0);
+		var pos = createPosition;
 
         var rotation = Quaternion.Euler(Random.Range(0, 180), Random.Range(0, 180), Random.Range(0, 180));
 
