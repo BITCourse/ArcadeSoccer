@@ -4,7 +4,7 @@ using System.Collections;
 using UnityStandardAssets.CrossPlatformInput;
 using UnityEngine.Networking;
 
-public class CharactorController : NetworkBehaviour {
+public class CommonController : NetworkBehaviour {
 
     public Transform mainCamera;
 
