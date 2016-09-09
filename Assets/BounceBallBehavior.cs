@@ -8,7 +8,11 @@ public class BounceBallBehavior : MonoBehaviour {
 	// Use this for initialization
 	void Start () {
         rigid = GetComponent<Rigidbody>();
-
+        var objs = GameObject.FindGameObjectsWithTag("Border");
+        foreach (var obj in objs)
+        {
+            obj.GetComponent<STGBorder>().target = transform;
+        }
     }
 	
 	// Update is called once per frame
