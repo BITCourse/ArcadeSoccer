@@ -4,7 +4,7 @@ using System.Collections;
 public class STGBorder : MonoBehaviour
 {
     [SerializeField]
-    private Transform target;
+    public Transform target;
 
     [SerializeField]
     private float distance = 20.0f;
@@ -27,7 +27,11 @@ public class STGBorder : MonoBehaviour
         {
             Vector3 offset = target.position - transform.position;
             float dis = Vector3.Dot(offset, transform.rotation * Vector3.up);
-            rend.material.color = new Color(1.0f, 1.0f, 1.0f, dis > distance ? 0.0f : maxOpacity * (1 - dis / distance));
+            rend.material.color = new Color(1, 1, 1, dis > distance ? 0.0f : maxOpacity * (1 - dis / distance));
         }
-	}
+        else
+        {
+            rend.material.color = new Color(1, 1, 1, 0);
+        }
+    }
 }

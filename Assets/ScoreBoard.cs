@@ -7,10 +7,12 @@ public class ScoreBoard : MonoBehaviour {
     public TextMesh scoreRed;
 
 	// Use this for initialization
-	void Start () {
-        Score.Instance().onScored += updateScore;
-        scoreBlue.text = "0";
-        scoreRed.text = "0";
+	void Start ()
+    {
+        Score score = Score.Instance();
+        score.onScored += updateScore;
+        scoreBlue.text = score.scoreBlue.ToString();
+        scoreRed.text = score.scoreRed.ToString();
     }
 	
 	// Update is called once per frame
@@ -18,11 +20,11 @@ public class ScoreBoard : MonoBehaviour {
 	    
 	}
 
-    void updateScore ()
+    void updateScore (int blue, int red)
     {
         Score score = Score.Instance();
-        scoreBlue.text = score.scoreBlue.ToString();
-        scoreRed.text = score.scoreRed.ToString();
+        if (blue > 0) scoreBlue.text = score.scoreBlue.ToString();
+        if (red > 0) scoreRed.text = score.scoreRed.ToString();
     }
 
 }

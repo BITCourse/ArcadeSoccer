@@ -3,8 +3,7 @@ using System.Collections;
 using UnityEngine.Networking;
 
 public class GoalChecker : NetworkBehaviour {
-
-    public GameObject ball;
+    
     public GameObject showWhenGoal = null;
 
     public enum GoalSide { Blue, Red };
@@ -12,8 +11,8 @@ public class GoalChecker : NetworkBehaviour {
 
     // Use this for initialization
     void Start () {
-	
-	}
+        Score.Instance().onScored += OnScore;
+    }
 	
 	// Update is called once per frame
 	void Update () {
@@ -22,10 +21,13 @@ public class GoalChecker : NetworkBehaviour {
 
     void OnTriggerEnter(Collider other)
     {
-        if (other.gameObject == ball)
+        if (!isServer)
+            return;
+
+        if (other.gameObject.tag == "Ball")
         {
             Score score = Score.Instance();
-            if(goalSide == GoalSide.Blue)
+            if (goalSide == GoalSide.Blue)
             {
                 score.score(1, 0);
             }
@@ -34,11 +36,17 @@ public class GoalChecker : NetworkBehaviour {
                 score.score(0, 1);
             }
 
-            showWhenGoal.SetActive(true);
-            Invoke("RemovePrefab", 3);
-
         }
 
+    }
+
+    void OnScore(int blue, int red)
+    {
+        if((goalSide == GoalSide.Blue ? blue : red) > 0)
+        {
+            showWhenGoal.SetActive(true);
+            Invoke("RemovePrefab", 3);
+        }
     }
 
     void RemovePrefab()

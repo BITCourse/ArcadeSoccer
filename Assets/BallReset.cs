@@ -32,7 +32,7 @@ public class BallReset : NetworkBehaviour {
 
     }
 
-    void onScored()
+    void onScored(int blue, int red)
     {
         if (resetInProgress)
             return;
