@@ -30,13 +30,13 @@ public class CommonController : NetworkBehaviour {
     private float charRot = 0;
     [SyncVar]
     private float bodyTurn = 0;
-
-    [SyncVar]
+    
     private bool jumped = false;
-    [SyncVar]
     private bool moving = false;
-    [SyncVar]
     private bool punched = false;
+    
+    [SyncVar]
+    private int animState; // 0 idle  1 move  2 jump  3 push
 
     private float lastPunch = -10f;
 
@@ -50,6 +50,16 @@ public class CommonController : NetworkBehaviour {
     public Quaternion getViewRotation()
     {
         return Quaternion.Euler(viewRot.y, viewRot.x, 0);
+    }
+
+    void setAnimState(int state = 0)
+    {
+        if ((animState < 2 || state > animState) || 
+            (animState == 2 && transform.position.y < 0.1f) || 
+            (animState == 3 && Time.time - lastPunch > 0.7f))
+        {
+            animState = state;
+        }
     }
 
     [Command]
@@ -159,7 +169,7 @@ public class CommonController : NetworkBehaviour {
                 + mainCamera.localRotation * new Vector3(0, 0, -cameraDistance);
 
             // 动作状态，同时向服务器发射指令
-            if (fire1)
+            if (fire1 && Time.time - lastPunch > 0.5f)
                 doPunch();
 
             if (jump)
@@ -169,23 +179,7 @@ public class CommonController : NetworkBehaviour {
             
         }
 
-        // 人物动画
-        if (punched || Time.time - lastPunch < 0.5f)
-        {
-            anim.CrossFade(pushAnimation);
-        }
-        else if (jumped || transform.position.y > 0.1f)
-        {
-            anim.CrossFade(jumpAnimation, 0.1f);
-        }
-        else if (moving)
-        {
-            anim.CrossFade(moveAnimation, 0.5f);
-        }
-        else
-        {
-            anim.CrossFade(idleAnimation, 0.3f);
-        }
+        setAnimState(moving ? 1 : 0);
 
         // 人物旋转
         transform.localRotation = Quaternion.Euler(0, charRot, 0);
@@ -195,6 +189,7 @@ public class CommonController : NetworkBehaviour {
         {
             lastPunch = Time.time;
             push.GetComponent<PushOnce>().punch();
+            setAnimState(3);
             punched = false;
         }
 
@@ -205,10 +200,19 @@ public class CommonController : NetworkBehaviour {
         if (jumped)
         {
             velY = jumpSpeed;
+            setAnimState(2);
             jumped = false;
         }
         rigid.velocity = Quaternion.Euler(0, viewRot.x, 0) * new Vector3(deltaX * moveSpeed, velY, deltaZ * moveSpeed);
 
+        // 人物动画
+        switch(animState)
+        {
+            case 3: anim.CrossFade(pushAnimation); break;
+            case 2: anim.CrossFade(jumpAnimation, 0.1f); break;
+            case 1: anim.CrossFade(moveAnimation, 0.5f); break;
+            default: anim.CrossFade(idleAnimation, 0.3f); break;
+        }
 
     }
 }

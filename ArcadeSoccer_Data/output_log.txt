@@ -19,7 +19,7 @@ Loading E:\ztlprojects\ArcadeSoccer\ArcadeSoccer_Data\Managed\UnityEngine.Networ
 Platform assembly: E:\ztlprojects\ArcadeSoccer\ArcadeSoccer_Data\Managed\HOTweenMicro.dll (this message is harmless)
 Loading E:\ztlprojects\ArcadeSoccer\ArcadeSoccer_Data\Managed\HOTweenMicro.dll into Unity Child Domain
 Platform assembly: E:\ztlprojects\ArcadeSoccer\ArcadeSoccer_Data\Managed\System.Core.dll (this message is harmless)
-- Completed reload, in  0.736 seconds
+- Completed reload, in  0.301 seconds
 desktop: 1366x768 60Hz; virtual: 1366x768 at 0,0
 <RI> Initializing input.
 <RI> Input initialized.
@@ -45,7 +45,82 @@ Loading E:\ztlprojects\ArcadeSoccer\ArcadeSoccer_Data\Managed\UnityEngine.Networ
 Platform assembly: E:\ztlprojects\ArcadeSoccer\ArcadeSoccer_Data\Managed\HOTweenMicro.dll (this message is harmless)
 Loading E:\ztlprojects\ArcadeSoccer\ArcadeSoccer_Data\Managed\HOTweenMicro.dll into Unity Child Domain
 Platform assembly: E:\ztlprojects\ArcadeSoccer\ArcadeSoccer_Data\Managed\System.Core.dll (this message is harmless)
-- Completed reload, in  0.059 seconds
+- Completed reload, in  0.103 seconds
+desktop: 1366x768 60Hz; virtual: 1366x768 at 0,0
+<RI> Initializing input.
+<RI> Input initialized.
+Platform assembly: E:\ztlprojects\ArcadeSoccer\ArcadeSoccer_Data\Managed\System.dll (this message is harmless)
+Undefined Queue: 'Opaque'
+ 
+(Filename:  Line: 271)
+
+Setting up 1 worker threads for Enlighten.
+  Thread -> id: 2cc -> priority: 1 
+<RI> Initialized touch support.
+Platform assembly: E:\ztlprojects\ArcadeSoccer\ArcadeSoccer_Data\Managed\System.dll (this message is harmless)
+Undefined Queue: 'Opaque'
+ 
+(Filename:  Line: 271)
+
+Setting up 1 worker threads for Enlighten.
+  Thread -> id: 1974 -> priority: 1 
+Socket: bind failed, error: Only one usage of each socket address (protocol/network address/port) is normally permitted.StartServer listen failed.
+ 
+(Filename: C:/buildslave/unity/build/artifacts/generated/common/runtime/UnityEngineDebugBindings.gen.cpp Line: 64)
+
+NullReferenceException: Object reference not set to an instance of an object
+  at Pole.OnCollisionEnter (UnityEngine.Collision other) [0x00000] in <filename unknown>:0 
+ 
+(Filename:  Line: -1)
+
+Initialize engine version: 5.2.1f1 (44735ea161b3)
+GfxDevice: creating device client; threaded=1
+Direct3D:
+    Version:  Direct3D 11.0 [level 11.0]
+    Renderer: NVIDIA GeForce GT 750M (ID=0xfe4)
+    Vendor:   NVIDIA
+    VRAM:     1985 MB
+Begin MonoManager ReloadAssembly
+Platform assembly: E:\ztlprojects\ArcadeSoccer\ArcadeSoccer_Data\Managed\UnityEngine.dll (this message is harmless)
+Loading E:\ztlprojects\ArcadeSoccer\ArcadeSoccer_Data\Managed\UnityEngine.dll into Unity Child Domain
+Platform assembly: E:\ztlprojects\ArcadeSoccer\ArcadeSoccer_Data\Managed\Assembly-CSharp.dll (this message is harmless)
+Loading E:\ztlprojects\ArcadeSoccer\ArcadeSoccer_Data\Managed\Assembly-CSharp.dll into Unity Child Domain
+Platform assembly: E:\ztlprojects\ArcadeSoccer\ArcadeSoccer_Data\Managed\Assembly-UnityScript.dll (this message is harmless)
+Loading E:\ztlprojects\ArcadeSoccer\ArcadeSoccer_Data\Managed\Assembly-UnityScript.dll into Unity Child Domain
+Platform assembly: E:\ztlprojects\ArcadeSoccer\ArcadeSoccer_Data\Managed\UnityEngine.UI.dll (this message is harmless)
+Loading E:\ztlprojects\ArcadeSoccer\ArcadeSoccer_Data\Managed\UnityEngine.UI.dll into Unity Child Domain
+Platform assembly: E:\ztlprojects\ArcadeSoccer\ArcadeSoccer_Data\Managed\UnityEngine.Networking.dll (this message is harmless)
+Loading E:\ztlprojects\ArcadeSoccer\ArcadeSoccer_Data\Managed\UnityEngine.Networking.dll into Unity Child Domain
+Platform assembly: E:\ztlprojects\ArcadeSoccer\ArcadeSoccer_Data\Managed\HOTweenMicro.dll (this message is harmless)
+Loading E:\ztlprojects\ArcadeSoccer\ArcadeSoccer_Data\Managed\HOTweenMicro.dll into Unity Child Domain
+Platform assembly: E:\ztlprojects\ArcadeSoccer\ArcadeSoccer_Data\Managed\System.Core.dll (this message is harmless)
+- Completed reload, in  0.076 seconds
+desktop: 1366x768 60Hz; virtual: 1366x768 at 0,0
+<RI> Initializing input.
+<RI> Input initialized.
+<RI> Initialized touch support.
+Initialize engine version: 5.2.1f1 (44735ea161b3)
+GfxDevice: creating device client; threaded=1
+Direct3D:
+    Version:  Direct3D 11.0 [level 11.0]
+    Renderer: NVIDIA GeForce GT 750M (ID=0xfe4)
+    Vendor:   NVIDIA
+    VRAM:     1985 MB
+Begin MonoManager ReloadAssembly
+Platform assembly: E:\ztlprojects\ArcadeSoccer\ArcadeSoccer_Data\Managed\UnityEngine.dll (this message is harmless)
+Loading E:\ztlprojects\ArcadeSoccer\ArcadeSoccer_Data\Managed\UnityEngine.dll into Unity Child Domain
+Platform assembly: E:\ztlprojects\ArcadeSoccer\ArcadeSoccer_Data\Managed\Assembly-CSharp.dll (this message is harmless)
+Loading E:\ztlprojects\ArcadeSoccer\ArcadeSoccer_Data\Managed\Assembly-CSharp.dll into Unity Child Domain
+Platform assembly: E:\ztlprojects\ArcadeSoccer\ArcadeSoccer_Data\Managed\Assembly-UnityScript.dll (this message is harmless)
+Loading E:\ztlprojects\ArcadeSoccer\ArcadeSoccer_Data\Managed\Assembly-UnityScript.dll into Unity Child Domain
+Platform assembly: E:\ztlprojects\ArcadeSoccer\ArcadeSoccer_Data\Managed\UnityEngine.UI.dll (this message is harmless)
+Loading E:\ztlprojects\ArcadeSoccer\ArcadeSoccer_Data\Managed\UnityEngine.UI.dll into Unity Child Domain
+Platform assembly: E:\ztlprojects\ArcadeSoccer\ArcadeSoccer_Data\Managed\UnityEngine.Networking.dll (this message is harmless)
+Loading E:\ztlprojects\ArcadeSoccer\ArcadeSoccer_Data\Managed\UnityEngine.Networking.dll into Unity Child Domain
+Platform assembly: E:\ztlprojects\ArcadeSoccer\ArcadeSoccer_Data\Managed\HOTweenMicro.dll (this message is harmless)
+Loading E:\ztlprojects\ArcadeSoccer\ArcadeSoccer_Data\Managed\HOTweenMicro.dll into Unity Child Domain
+Platform assembly: E:\ztlprojects\ArcadeSoccer\ArcadeSoccer_Data\Managed\System.Core.dll (this message is harmless)
+- Completed reload, in  0.063 seconds
 desktop: 1366x768 60Hz; virtual: 1366x768 at 0,0
 <RI> Initializing input.
 <RI> Input initialized.
@@ -56,16 +131,11 @@ Undefined Queue: 'Opaque'
 (Filename:  Line: 271)
 
 Setting up 1 worker threads for Enlighten.
-  Thread -> id: 2a74 -> priority: 1 
+  Thread -> id: 2d7c -> priority: 1 
 Platform assembly: E:\ztlprojects\ArcadeSoccer\ArcadeSoccer_Data\Managed\System.dll (this message is harmless)
 Undefined Queue: 'Opaque'
  
 (Filename:  Line: 271)
 
 Setting up 1 worker threads for Enlighten.
-  Thread -> id: fc4 -> priority: 1 
-NullReferenceException: Object reference not set to an instance of an object
-  at Pole.OnCollisionEnter (UnityEngine.Collision other) [0x00000] in <filename unknown>:0 
- 
-(Filename:  Line: -1)
-
+  Thread -> id: 2508 -> priority: 1 

@@ -28,7 +28,7 @@ public class PushOnce : NetworkBehaviour {
 
         proc *= Mathf.Exp(-Time.deltaTime * 5f);
         
-        transform.localPosition = new Vector3(0, 0.9f, 0.5f * proc);
+        transform.localPosition = new Vector3(0, 0.9f, 0.6f * proc);
 
         if (proc > 0.1f)
             transform.localScale = new Vector3(proc, proc, proc);
