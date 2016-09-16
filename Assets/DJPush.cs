@@ -6,8 +6,8 @@ public class DJPush : MonoBehaviour
 {
     public CommonController charactor;
     public float ballForce = 360f;
-    public float charactorPushSpeed = 12;
-    public float charactorPushVerticalSpeed = 2;
+    public float charactorPushSpeed = 15;
+    public float charactorPushVerticalSpeed = 5;
 
     private float proc = 0.0f;
     private bool ballPushed = true;
@@ -59,8 +59,13 @@ public class DJPush : MonoBehaviour
         }
         else if (other.tag == "Player")
         {
-            Vector3 direction = charactor.transform.position - transform.position;
+            // 抬高玩家一点，以便该玩家被判定为离地
+            other.transform.localPosition += Vector3.up * 0.11f;
+
+            Vector3 direction = other.transform.localPosition - charactor.transform.localPosition;
+            direction.y *= 0.2f;
             direction.Normalize();
+
             other.GetComponent<Rigidbody>().velocity =
                 charactorPushSpeed * direction + Vector3.up * charactorPushVerticalSpeed;
         }
