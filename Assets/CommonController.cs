@@ -15,36 +15,40 @@ public class CommonController : NetworkBehaviour {
     public string moveAnimation = "run";
     public string jumpAnimation = "hit";
     public string pushAnimation = "punch";
+    public string specialAnimation = "crouch";
 
-    public float cameraDistance = 1f;
-    public float cameraHeight = 1f;
+    public float cameraDistance = 1.2f;
+    public float cameraHeight = 1.1f;
 
-    public float mouseXSensitivity = 0.02f;
-    public float mouseYSensitivity = 0.02f;
+    public float mouseXSensitivity = 0.2f;
+    public float mouseYSensitivity = 0.2f;
 
-    public float moveSpeed = 0.1f;
+    public float moveSpeed = 9f;
 
-    public float jumpSpeed = 5f;
+    public float jumpSpeed = 7f;
 
     [SyncVar]
     private float charRot = 0;
     [SyncVar]
     private float bodyTurn = 0;
-    
+
     private bool jumped = false;
     private bool moving = false;
     private bool punched = false;
-    
+
     [SyncVar]
-    private int animState; // 0 idle  1 move  2 jump  3 push
+    private int animState; // 0 idle  1 move  2 jump  3 push  4 sp
 
     private float lastPunch = -10f;
+    private float specialEnd = -10f;
 
     private Vector2 viewRot = Vector2.zero;
 
     private Rigidbody rigid = null;
     private Collider col = null;
     private Animation anim = null;
+
+    public bool specialReady { get; set; }
 
 
     public Quaternion getViewRotation()
@@ -56,10 +60,17 @@ public class CommonController : NetworkBehaviour {
     {
         if ((animState < 2 || state > animState) || 
             (animState == 2 && transform.position.y < 0.1f) || 
-            (animState == 3 && Time.time - lastPunch > 0.7f))
+            (animState == 3 && Time.time - lastPunch > 0.7f) ||
+            (animState == 4 && Time.time > specialEnd))
         {
             animState = state;
         }
+    }
+
+    public void setSpecialAnim(float cd)
+    {
+        specialEnd = Time.time + cd;
+        animState = 4;
     }
 
     [Command]
@@ -130,6 +141,7 @@ public class CommonController : NetworkBehaviour {
         {
             mainCamera = Camera.main.transform;
         }
+        specialReady = true;
     }
 	
 	// Update is called once per frame
@@ -208,6 +220,7 @@ public class CommonController : NetworkBehaviour {
         // 人物动画
         switch(animState)
         {
+            case 4: anim.CrossFade(specialAnimation); break;
             case 3: anim.CrossFade(pushAnimation); break;
             case 2: anim.CrossFade(jumpAnimation, 0.1f); break;
             case 1: anim.CrossFade(moveAnimation, 0.5f); break;

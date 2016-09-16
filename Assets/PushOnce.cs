@@ -2,16 +2,18 @@
 using System.Collections;
 using UnityEngine.Networking;
 
-public class PushOnce : NetworkBehaviour {
+public class PushOnce : MonoBehaviour {
 
     public CommonController charactor;
     public float force = 100f;
     
     private float proc = 0.0f;
+    private bool ballPushed = true;
 
     public void punch()
     {
         proc = 1.5f;
+        ballPushed = false;
         gameObject.SetActive(true);
     }
 
@@ -42,8 +44,9 @@ public class PushOnce : NetworkBehaviour {
 
     void OnTriggerEnter(Collider other)
     {
-        if(other.tag == "Ball")
+        if(other.tag == "Ball" && !ballPushed)
         {
+            ballPushed = true;
             Quaternion direction = charactor.getViewRotation();
             other.GetComponent<Rigidbody>().AddForce(direction * Vector3.forward * force, ForceMode.Impulse);
         }
