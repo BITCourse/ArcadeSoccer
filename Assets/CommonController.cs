@@ -27,6 +27,8 @@ public class CommonController : NetworkBehaviour {
 
     public float jumpSpeed = 7f;
 
+    public float jumpSteer = 1f;
+
     [SyncVar]
     private float charRot = 0;
     [SyncVar]
@@ -58,6 +60,8 @@ public class CommonController : NetworkBehaviour {
 
     void setAnimState(int state = 0)
     {
+        if (!isLocalPlayer && !isServer)
+            return;
         if ((animState < 2 || state > animState) || 
             (animState == 2 && transform.position.y < 0.1f) || 
             (animState == 3 && Time.time - lastPunch > 0.7f) ||
@@ -69,6 +73,8 @@ public class CommonController : NetworkBehaviour {
 
     public void setSpecialAnim(float cd)
     {
+        if (!isLocalPlayer && !isServer)
+            return;
         specialEnd = Time.time + cd;
         animState = 4;
     }
@@ -215,10 +221,18 @@ public class CommonController : NetworkBehaviour {
             setAnimState(2);
             jumped = false;
         }
-        rigid.velocity = Quaternion.Euler(0, viewRot.x, 0) * new Vector3(deltaX * moveSpeed, velY, deltaZ * moveSpeed);
+        Vector3 targetVel = Quaternion.Euler(0, viewRot.x, 0) * new Vector3(deltaX * moveSpeed, velY, deltaZ * moveSpeed);
+        if (transform.position.y < 0.1f)
+        {
+            rigid.velocity = targetVel;
+        }
+        else
+        {
+            rigid.velocity = Vector3.Lerp(targetVel, rigid.velocity, Mathf.Exp(-Time.deltaTime * jumpSteer));
+        }
 
         // 人物动画
-        switch(animState)
+        switch (animState)
         {
             case 4: anim.CrossFade(specialAnimation); break;
             case 3: anim.CrossFade(pushAnimation); break;

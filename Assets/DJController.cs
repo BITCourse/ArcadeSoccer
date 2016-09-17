@@ -9,8 +9,7 @@ public class DJController : NetworkBehaviour
     public GameObject pushObject;
 
     CommonController con;
-
-    bool isPushReady = true;
+    
     bool pushed = false;
 
     float lastPush = -20;
@@ -21,10 +20,24 @@ public class DJController : NetworkBehaviour
         doDJPush();
     }
 
+    [ClientRpc]
+    void RpcDJPush()
+    {
+        if(!isLocalPlayer)
+            pushed = true;
+    }
+
     void doDJPush()
     {
         if (!isServer)
-            CmdDJPush();
+        {
+            if (isLocalPlayer)
+                CmdDJPush();
+        }
+        else
+        {
+            RpcDJPush();
+        }
         pushed = true;
     }
 
